@@ -4,25 +4,38 @@
 <head>
   <title>Movie Streaming Search</title>
   <meta charset="UTF-8" />
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" type="text/css" href="./assets/CSS/reset.css">
   <link rel="stylesheet" type="text/css" href="./assets/CSS/style.css" />
   
 </head>
 
 <body>
-  <header>Movie Search Search</header>
+  <header class="has-background-info-dark p-4">
+    <h1 class="is-size-2 has-text-centered has-text-light"><b>Where is it streaming?</b></h1>
+  </header>
 
-  <div class="movie-search">
-    <label>Movie Search</label>
-    <input/> 
+  <div class="block mt-5">
+
+    <div class="field">
+      <label class="label has-text-centered is-size-4">Movie/Show Title</label>
+      <div class="control has-text-centered">
+        <input class="input" type="text" style="width: 33%;" placeholder="What movie are your looking for?">
+      </div>
+    </div>
+
+    <div class="field is-grouped is-justify-content-center">
+      <div class="control">
+        <button class="button is-link has-background-warning-dark">Search</button>
+      </div>
+    </div>
   </div>
 
-  <section class="main-container"></section>
+  <section class="block main-container"></section>
     
-    <div class="container-1">Container 1 - Stream Results</div>
+    <div class="block">Container 1 - Stream Results</div>
   
-    <div class="container-2">Container 2 - Movie Results</div>
+    <div class="block">Container 2 - Movie Results</div>
 
 </body>
 
