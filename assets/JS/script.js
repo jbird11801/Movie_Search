@@ -1,12 +1,22 @@
+// global variables 
 
+var inputEl = $('#movieInput');
+
+var searchButEl = $('#Search');
+
+
+
+searchButEl.on("click",function(){
+
+var searchInput = inputEl.val();
+
+findStreamingService( searchInput );
+
+});
 
 // input the show name and it will out said shows info
 
 function findStreamingService( ShowNameString ) {
-
-    ShowNameString = ShowNameString.trim();
-
-    ShowNameString = ShowNameString.toLowerCase();
 
     const url = 'https://streaming-availability.p.rapidapi.com/search/title?title='+ ShowNameString +'&country=us&show_type=movie&output_language=en';
 
@@ -39,5 +49,5 @@ function findStreamingService( ShowNameString ) {
         console.log(data);
 
     })
-    
+
 }
