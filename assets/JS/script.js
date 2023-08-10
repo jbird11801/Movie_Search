@@ -103,13 +103,15 @@ const options = {
 
         LogInfo();
 
+        createMovieElement();
+
     })
 
 }
 
 function LogInfo(){
 
-   // console.log(rapidData);
+   console.log(rapidData);
 
    //console.log(tmdbData);
 
@@ -120,6 +122,30 @@ function LogInfo(){
     console.log('streaming Info')//streaming Info
 
     console.log(rapidData.streamingInfo);
+
+    console.log(rapidData.streamingInfo.us)
+    
+    console.log('Rent Info')//streaming Info
+
+    var temp = [];
+
+    for(var i = 0; i < rapidData.streamingInfo.us.length; i++) {
+        if (temp.includes(rapidData.streamingInfo.us[i].service)){
+   
+         }
+   
+         else 
+   
+         {
+   
+            temp.push(rapidData.streamingInfo.us[i].service)
+   
+            console.log(rapidData.streamingInfo.us[i].service);
+            console.log(rapidData.streamingInfo.us[i].streamingType);
+            console.log(rapidData.streamingInfo.us[i].link);
+   
+         }
+    };
 
     console.log('type of content')// type of content 
 
@@ -149,4 +175,93 @@ function LogInfo(){
 
     console.log(tmdbData.overview);
 
+}
+
+// function createMovieElement() {
+
+//     var site = document.createElement("div");
+//     site.classList.add("streamcard");
+    
+//     var service = document.createElement("p");
+//     var streamingType = document.createElement("p");
+//     var quality = document.createElement("p");
+//     var link = document.createElement("p");
+
+//     var temp = []
+
+//     for(var i = 0; i < rapidData.streamingInfo.us.length; i++) {
+//         if (temp.includes(rapidData.streamingInfo.us[i].service)){
+   
+//          }
+   
+//          else 
+   
+//          {
+   
+//             temp.push(rapidData.streamingInfo.us[i].service)
+
+//             var movieElement = createMovieElement(temp[i]);
+//             streamDetailsDiv.appendChild(movieElement);
+   
+//             service.textContent = rapidData.streamingInfo.us[i].service,
+//             streamingType.textContent = rapidData.streamingInfo.us[i].streamingType,
+//             quality.textContent = rapidData.streamingInfo.us[i].quality,
+//             link = rapidData.streamingInfo.us[i].link
+   
+//          }
+//     };
+
+//     // service.textContent = rapidData.streamingInfo.us[i].service,
+//     // streamingType.textContent = rapidData.streamingInfo.us[i].streamingType,
+//     // quality.textContent = rapidData.streamingInfo.us[i].quality,
+//     // link = rapidData.streamingInfo.us[i].link
+    
+//     site.appendChild(service);
+//     site.appendChild(streamingType);
+//     site.appendChild(quality);
+//     site.appendChild(link);
+    
+//     return site;
+// }
+
+// var streamDetailsDiv = document.getElementById("stream-details");
+
+// for (var i = 0; i < temp.length; i++) {
+//     var movieElement = createMovieElement(temp[i]);
+//     streamDetailsDiv.appendChild(movieElement);
+// }
+
+
+
+function createMovieElement(movieData) {
+    var site = document.createElement("div");
+    site.classList.add("streamcard");
+    
+    var movieName = document.createElement("p");
+    var siteStreaming = document.createElement("p");
+    var streamingCost = document.createElement("p");
+    
+    movieName.textContent = movieData.name;
+    siteStreaming.textContent = "Streaming: " + movieData.streaming;
+    streamingCost.textContent = "Cost: " + movieData.cost;
+    
+    site.appendChild(movieName);
+    site.appendChild(siteStreaming);
+    site.appendChild(streamingCost);
+    
+    return site;
+}
+
+var moviesData = [
+    { name: "Avengers", streaming: "Netflix", cost: "$10/month" },
+    { name: "Batman", streaming: "Max", cost: "$4.99" },
+    { name: "Lego Movie", streaming: "Hulu", cost: "$18.99" },
+    { name: "Jurassic Park", streaming: "Netflix", cost: "No fee" },
+];
+
+var streamDetailsDiv = document.getElementById("stream-details");
+
+for (var i = 0; i < moviesData.length; i++) {
+    var movieElement = createMovieElement(moviesData[i]);
+    streamDetailsDiv.appendChild(movieElement);
 }
