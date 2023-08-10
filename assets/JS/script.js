@@ -19,6 +19,19 @@ findStreamingService( searchInput )
 
 });
 
+document.addEventListener("keydown", function (event) {
+
+    var keycode = event.key;
+
+    if(keycode === "Enter"){
+        
+        var searchInput = inputEl.val();
+
+        findStreamingService( searchInput )
+    }
+
+  });
+
 // input the show name and it will out said shows info
 
 function findStreamingService( ShowNameString ) {
@@ -111,7 +124,7 @@ function LogInfo(){
 
    // console.log(rapidData);
 
-   //console.log(tmdbData);
+   console.log(tmdbData);
 
     console.log('Title')//Title
 
