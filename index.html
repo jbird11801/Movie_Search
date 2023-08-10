@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" type="text/css" href="./assets/CSS/reset.css">
   <link rel="stylesheet" type="text/css" href="./assets/CSS/style.css" />
-  
+
 </head>
 
 <body>
@@ -15,32 +15,35 @@
     <h1 class="is-size-2 has-text-centered has-text-light"><b>Where is it streaming?</b></h1>
   </header>
 
-  <div class="block mt-5">
+  <section class="block mt-5">
 
     <div class="field">
       <label class="label has-text-centered is-size-4">Movie/Show Title</label>
       <div class="control has-text-centered">
-        <input id = "movieInput" class="input" type="text" style="width: 33%;" placeholder="What movie are your looking for?">
+        <input class="input" type="text" style="width: 33%;" placeholder="What movie are your looking for?">
       </div>
     </div>
 
     <div class="field is-grouped is-justify-content-center">
       <div class="control">
-        <button id="Search" class="button is-link has-background-warning-dark">Search</button>
+        <button class="button is-link has-background-warning-dark">Search</button>
       </div>
     </div>
-  </div>
+  </section>
 
-  <section class="block main-container"></section>
-    
-    <div class="block">Container 1 - Stream Results</div>
-  
-    <div class="block">Container 2 - Movie Results</div>
+  <section class="columns m-3 main-container">
+    <div id="stream-details" class="column is-auto mx-3 container-1">
+    </div>
+
+
+    <div id="movie-details" class="column is-half mx-3 container-2">
+      <p>Container 2 Stream results</p>
+    </div>
+  </section>
 
 </body>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-<script src="./assets/JS/script.js"></script>
+<script src="assets/JS/script.js"></script>
 
 </html>
