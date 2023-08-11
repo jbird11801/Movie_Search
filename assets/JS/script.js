@@ -4,6 +4,8 @@ var inputEl = $('#movieInput');
 
 var searchButEl = $('#Search');
 
+var streamingDetails = $('#stream-details');
+
 var rapidData;
 
 var tmdbData;
@@ -116,13 +118,15 @@ const options = {
 
         LogInfo();
 
+        createMovieElement();
+
     })
 
 }
 
 function LogInfo(){
 
-   // console.log(rapidData);
+    console.log(rapidData);
 
    console.log(tmdbData);
 
@@ -163,3 +167,53 @@ function LogInfo(){
     console.log(tmdbData.overview);
 
 }
+ 
+ function createMovieElement() {
+
+    console.log(rapidData.streamingInfo)
+
+    if (!(rapidData.streamingInfo.us)){
+
+        streamingDetails.text("No services stream this title");
+
+    }
+
+    else{
+
+    var temp = [];
+    
+    for(var i = 0; i < rapidData.streamingInfo.us.length; i++) {
+
+         if (temp.includes(rapidData.streamingInfo.us[i].service) === false){
+    
+             temp.push(rapidData.streamingInfo.us[i].service)
+
+             var divEl = $('<section></section>');
+
+             var h1El = $('<h1></h1>');
+
+             var linkEl = $('<link></link>');
+
+             streamingDetails.append(divEl);
+
+             divEl.append(h1El);
+
+             divEl.append(linkEl);
+
+             h1El.text(rapidData.streamingInfo.us[i].service);
+
+             linkEl.text("Veiw Here");
+
+             linkEl.attr('href', rapidData.streamingInfo.us[i].link);
+
+          }
+
+     }
+
+    }
+
+ }
+ 
+ linkEl.text("Veiw Here");
+
+ linkEl.attr('href', rapidData.streamingInfo.us[i].link);
