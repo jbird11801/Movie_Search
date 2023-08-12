@@ -4,6 +4,8 @@ var inputEl = $('#movieInput');
 
 var searchButEl = $('#Search');
 
+var streamDetailsDiv = document.getElementById("stream-details");
+
 var rapidData;
 
 var tmdbData;
@@ -17,7 +19,21 @@ searchButEl.on("click", function () {
 
     findStreamingService(searchInput)
 
-});
+  });
+
+  document.addEventListener("keydown", function (event) {
+
+    var keycode = event.key;
+
+    if(keycode === "Enter"){
+
+        var searchInput = inputEl.val();
+
+        findStreamingService( searchInput )
+    }
+
+  });
+
 
 // input the show name and it will out said shows info
 
@@ -55,11 +71,11 @@ function findStreamingService(ShowNameString) {
 
             rapidData = data.result[0];
 
-            console.log(rapidData.streamingInfo);
+            //console.log(rapidData.streamingInfo);
 
             var moviesData = []
 
-            console.log(rapidData);
+            //console.log(rapidData);
 
             for (var i = 0; i < rapidData.streamingInfo.us.length; i++) {
                 var movieInfo = {
@@ -70,8 +86,7 @@ function findStreamingService(ShowNameString) {
                 };
                 moviesData.push(movieInfo);
             }
-
-            var streamDetailsDiv = document.getElementById("stream-details");
+    
 
             for (var i = 0; i < moviesData.length; i++) {
                 var movieElement = createMovieElement(moviesData[i]);
@@ -122,9 +137,7 @@ function movieDetails(imdb_id, show_type) {
 
             }
 
-
-
-            LogInfo();
+            // LogInfo();
 
             createMovieElement(data);
 
@@ -132,109 +145,118 @@ function movieDetails(imdb_id, show_type) {
 
 }
 
-function LogInfo() {
 
-    console.log(rapidData);
+// function LogInfo() {
 
-    //console.log(tmdbData);
+//     console.log(rapidData);
 
-    console.log('Title')//Title
+//     //console.log(tmdbData);
 
-    console.log(rapidData.originalTitle);
 
-    console.log('streaming Info')//streaming Info
+//     console.log('Title')//Title
 
-    console.log(rapidData.streamingInfo);
+//     console.log(rapidData.originalTitle);
 
-    console.log(rapidData.streamingInfo.us)
+//     console.log('streaming Info')//streaming Info
 
-    console.log('Rent Info')//streaming Info
+//     console.log(rapidData.streamingInfo);
 
-    var temp = [];
+//     console.log(rapidData.streamingInfo.us)
 
-    for (var i = 0; i < rapidData.streamingInfo.us.length; i++) {
-        if (temp.includes(rapidData.streamingInfo.us[i].service)) {
 
-        }
+//     console.log('Rent Info')//streaming Info
 
-        else {
+//     var temp = [];
 
-            temp.push(rapidData.streamingInfo.us[i].service)
+//     for (var i = 0; i < rapidData.streamingInfo.us.length; i++) {
+//         if (temp.includes(rapidData.streamingInfo.us[i].service)) {
 
-            console.log(rapidData.streamingInfo.us[i].service);
-            console.log(rapidData.streamingInfo.us[i].streamingType);
-            console.log(rapidData.streamingInfo.us[i].link);
+//         }
 
-        }
-    };
 
-    console.log('type of content')// type of content 
+//         else {
 
-    console.log(rapidData.type);
+//             temp.push(rapidData.streamingInfo.us[i].service)
 
-    console.log('release_date')//release date
+//             console.log(rapidData.streamingInfo.us[i].service);
+//             console.log(rapidData.streamingInfo.us[i].streamingType);
+//             console.log(rapidData.streamingInfo.us[i].link);
 
-    if (rapidData.type === 'movie') {
 
-        console.log(tmdbData.release_date);
+//         }
+//     };
 
-    }
+//     console.log('type of content')// type of content 
 
-    else {
 
-        console.log(tmdbData.first_air_date);
+//     console.log(rapidData.type);
 
-    }
 
-    console.log('poster')//poster
+//     console.log('release_date')//release date
 
-    console.log('https://image.tmdb.org/t/p/original/' + tmdbData.poster_path)
+//     if (rapidData.type === 'movie') {
 
-    console.log('desciption')// desciption 
+//         console.log(tmdbData.release_date);
 
-    console.log(tmdbData.overview);
+//     }
 
-}
+//     else {
+
+//         console.log(tmdbData.first_air_date);
+
+//     }
+
+//     console.log('poster')//poster
+
+//     console.log('https://image.tmdb.org/t/p/original/' + tmdbData.poster_path)
+
+//     console.log('desciption')// desciption 
+
+//     console.log(tmdbData.overview);
+
+// }
 
 
 function createMovieElement(movieData) {
+
+    // if (!(rapidData.streamingInfo.us)){
+
+    //     streamDetailsDiv.textContent = "No streaming services provide this title";
+
+    // }
+    
+    // else 
+    
+    // {
+
     var site = document.createElement("div");
+
     site.classList.add("streamcard");
 
     var service = document.createElement("p");
+
     var streamingType = document.createElement("p");
+
     var quality = document.createElement("p");
+
     var link = document.createElement("link");
 
     service.textContent = "Service: " + movieData.website;
+
     streamingType.textContent = "Availability: " + movieData.type;
+
     quality.textContent = "Quality: " + movieData.quality;
+
     link.textContent = "Link: " + movieData.link;
 
     site.appendChild(service);
+
     site.appendChild(streamingType);
+
     site.appendChild(quality);
 
     return site;
+
+   // }
+
 }
-
-// var moviesData = []
-
-// console.log(rapidData);
-
-// for (var i = 0; i < rapidData.streamingInfo.us.length; i++) {
-//     var movieInfo = {
-//         website: rapidData.streamingInfo.us[i].service,
-//         type: rapidData.streamingInfo.us[i].streamingType,
-//         quality: rapidData.streamingInfo.us[i].link
-//     };
-//     moviesData.push(movieInfo);
-// }
-
-
-// var streamDetailsDiv = document.getElementById("stream-details");
-
-// for (var i = 0; i < moviesData.length; i++) {
-//     var movieElement = createMovieElement(moviesData[i]);
-//     streamDetailsDiv.appendChild(movieElement);
-// }
