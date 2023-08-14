@@ -6,6 +6,10 @@ var searchButEl = $('#Search');
 
 var streamDetailsDiv = document.getElementById("stream-details");
 
+var HasChildren = false;
+
+var streamingEl;
+
 var rapidData;
 
 var tmdbData;
@@ -14,6 +18,8 @@ var tmdbData;
 //Search btton function
 
 searchButEl.on("click", function () {
+
+    clearResults ();
 
     var searchInput = inputEl.val();
 
@@ -27,9 +33,7 @@ searchButEl.on("click", function () {
 
     if(keycode === "Enter"){
 
-        streamDetailsDiv.textContent = "";
-
-        // streamDetailsDiv.children.style.display = "none";
+        clearResults ();
 
         var searchInput = inputEl.val();
 
@@ -37,6 +41,26 @@ searchButEl.on("click", function () {
     }
 
   });
+
+  function clearResults () {
+    
+    streamDetailsDiv.textContent = "";
+
+    if(HasChildren === true){
+
+        HasChildren = false;
+
+        for ( var i = 0 ; i < streamingEl.length ; i++){
+
+            streamingEl[i].remove();
+
+        }
+
+    }
+
+    streamingEl = [];
+
+  }
 
 
 // input the show name and it will out said shows info
@@ -92,6 +116,8 @@ function findStreamingService(ShowNameString) {
     
             {
 
+            HasChildren = true;
+
             for (var i = 0; i < rapidData.streamingInfo.us.length; i++) {
 
                 var movieInfo = {
@@ -113,6 +139,8 @@ function findStreamingService(ShowNameString) {
             for (var i = 0; i < moviesData.length; i++) {
 
                 var movieElement = createMovieElement(moviesData[i]);
+
+                streamingEl.push(movieElement);
 
                 streamDetailsDiv.appendChild(movieElement);
 
@@ -166,7 +194,7 @@ function movieDetails(imdb_id, show_type) {
 
             // LogInfo();
 
-            createMovieElement(data);
+            //createMovieElement(data);
 
         })
 
@@ -250,7 +278,7 @@ function createMovieElement(movieData) {
     var quality = document.createElement("p");
 
     var link = document.createElement("a");
-
+    
     service.textContent = "Service: " + movieData.website.toUpperCase();
 
     streamingType.textContent = "Availability: " + movieData.type;
