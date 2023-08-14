@@ -308,3 +308,35 @@ function createMovieElement(movieData) {
     return site;
 
 }
+
+function createMovieDetails() {
+    var detail = document.createElement("div");
+    detail.classList.add("movieContent");
+    
+    var movieTitle  = document.createElement("p");
+    var moviePoster = document.createElement("img");
+    var movieDescription = document.createElement("p");
+    var movieRating = document.createElement("p");
+    
+    movieTitle.textContent = rapidData.originalTitle;
+    moviePoster.src = 'https://image.tmdb.org/t/p/original/' + tmdbData.poster_path;
+    moviePoster.width = 300;
+    moviePoster.height = 400;
+    movieDescription.textContent = tmdbData.overview;
+    movieRating.textContent = tmbdData.vote_average + "/10";
+
+    
+    detail.appendChild(movieTitle); 
+    detail.appendChild(moviePoster); 
+    detail.appendChild(movieRating); 
+    detail.appendChild(movieDescription); 
+    
+    
+    return detail;
+}
+
+var movieDetailsDiv = document.getElementById("movie-details");
+
+var movieContent = createMovieDetails();
+
+movieDetailsDiv.appendChild(movieContent);
