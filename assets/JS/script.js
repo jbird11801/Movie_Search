@@ -136,6 +136,7 @@ function findStreamingService(ShowNameString) {
 
             }
     
+
             for (var i = 0; i < moviesData.length; i++) {
 
                 var movieElement = createMovieElement(moviesData[i]);
@@ -200,11 +201,13 @@ function movieDetails(imdb_id, show_type) {
 
 }
 
+
 // function LogInfo() {
 
 //     console.log(rapidData);
 
 //     console.log(tmdbData);
+
 
 //     console.log('Title')//Title
 
@@ -216,6 +219,7 @@ function movieDetails(imdb_id, show_type) {
 
 //     console.log(rapidData.streamingInfo.us)
 
+
 //     console.log('Rent Info')//streaming Info
 
 //     var temp = [];
@@ -225,6 +229,7 @@ function movieDetails(imdb_id, show_type) {
 
 //         }
 
+
 //         else {
 
 //             temp.push(rapidData.streamingInfo.us[i].service)
@@ -233,12 +238,15 @@ function movieDetails(imdb_id, show_type) {
 //             console.log(rapidData.streamingInfo.us[i].streamingType);
 //             console.log(rapidData.streamingInfo.us[i].link);
 
+
 //         }
 //     };
 
 //     console.log('type of content')// type of content 
 
+
 //     console.log(rapidData.type);
+
 
 //     console.log('release_date')//release date
 
@@ -300,3 +308,35 @@ function createMovieElement(movieData) {
     return site;
 
 }
+
+function createMovieDetails() {
+    var detail = document.createElement("div");
+    detail.classList.add("movieContent");
+    
+    var movieTitle  = document.createElement("p");
+    var moviePoster = document.createElement("img");
+    var movieDescription = document.createElement("p");
+    var movieRating = document.createElement("p");
+    
+    movieTitle.textContent = rapidData.originalTitle;
+    moviePoster.src = 'https://image.tmdb.org/t/p/original/' + tmdbData.poster_path;
+    moviePoster.width = 300;
+    moviePoster.height = 400;
+    movieDescription.textContent = tmdbData.overview;
+    movieRating.textContent = tmbdData.vote_average + "/10";
+
+    
+    detail.appendChild(movieTitle); 
+    detail.appendChild(moviePoster); 
+    detail.appendChild(movieRating); 
+    detail.appendChild(movieDescription); 
+    
+    
+    return detail;
+}
+
+var movieDetailsDiv = document.getElementById("movie-details");
+
+var movieContent = createMovieDetails();
+
+movieDetailsDiv.appendChild(movieContent);
