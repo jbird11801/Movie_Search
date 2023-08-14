@@ -27,6 +27,10 @@ searchButEl.on("click", function () {
 
     if(keycode === "Enter"){
 
+        streamDetailsDiv.textContent = "";
+
+        // streamDetailsDiv.children.style.display = "none";
+
         var searchInput = inputEl.val();
 
         findStreamingService( searchInput )
@@ -77,23 +81,47 @@ function findStreamingService(ShowNameString) {
 
             //console.log(rapidData);
 
+            
+            if (!(rapidData.streamingInfo.us)){
+
+                 streamDetailsDiv.textContent = "No streaming services provide this title";
+
+            }
+    
+            else 
+    
+            {
+
             for (var i = 0; i < rapidData.streamingInfo.us.length; i++) {
+
                 var movieInfo = {
+
                     website: rapidData.streamingInfo.us[i].service,
+
                     type: rapidData.streamingInfo.us[i].streamingType,
+
                     quality: rapidData.streamingInfo.us[i].quality,
+
                     link: rapidData.streamingInfo.us[i].link
+
                 };
+
                 moviesData.push(movieInfo);
+
             }
     
 
             for (var i = 0; i < moviesData.length; i++) {
+
                 var movieElement = createMovieElement(moviesData[i]);
+
                 streamDetailsDiv.appendChild(movieElement);
+
             }
 
             movieDetails(rapidData.imdbId, rapidData.type)
+
+            }
 
         })
 
@@ -219,16 +247,6 @@ function movieDetails(imdb_id, show_type) {
 
 function createMovieElement(movieData) {
 
-    // if (!(rapidData.streamingInfo.us)){
-
-    //     streamDetailsDiv.textContent = "No streaming services provide this title";
-
-    // }
-    
-    // else 
-    
-    // {
-
     var site = document.createElement("div");
 
     site.classList.add("streamcard");
@@ -239,15 +257,17 @@ function createMovieElement(movieData) {
 
     var quality = document.createElement("p");
 
-    var link = document.createElement("link");
+    var link = document.createElement("a");
 
-    service.textContent = "Service: " + movieData.website;
+    service.textContent = "Service: " + movieData.website.toUpperCase();
 
     streamingType.textContent = "Availability: " + movieData.type;
 
     quality.textContent = "Quality: " + movieData.quality;
 
-    link.textContent = "Link: " + movieData.link;
+    link.textContent = "View Here";
+
+    link.href = movieData.link;
 
     site.appendChild(service);
 
@@ -255,8 +275,8 @@ function createMovieElement(movieData) {
 
     site.appendChild(quality);
 
-    return site;
+    site.appendChild(link);
 
-   // }
+    return site;
 
 }
