@@ -204,7 +204,7 @@ function movieDetails(imdb_id, show_type) {
 
 //     console.log(rapidData);
 
-//     //console.log(tmdbData);
+//     console.log(tmdbData);
 
 //     console.log('Title')//Title
 
