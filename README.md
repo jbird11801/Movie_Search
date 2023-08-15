@@ -1,16 +1,20 @@
 # Movie_Search
 
+Live site : https://jbird11801.github.io/Movie_Search/
+
 ## Description
 
 Have you ever sat down , and wanted to watch a movie but had no idea what streaming site its on no problem. simply look up what movie you want and be amazed to see what streaming service its on.
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+Simply input a show or movie into the search
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
+![Image of search bar](assets/images/SearchBar.png)
 
-![alt text](assets/images/screenshot.png)
+Then look at the results to find information the content and where to watch it with a link to that site
+
+![Search Results](assets/images/Results.PNG)
 
 ## Credits
 
@@ -22,6 +26,12 @@ tmbd api https://developer.themoviedb.org/docs/getting-started
 
 rapid api https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability
 
+Used Jqury and Jqury ui https://jquery.com/
+
+Used to learn about .remove() https://developer.mozilla.org/en-US/docs/Web/API/Element/remove
+
+Used bulma frame work https://bulma.io/
+
 ## Mock up
 
 ![Mock up useing figma](assets/images/WireFrame.png)
@@ -30,7 +40,7 @@ Group Idea movie search that give you list of actors and where to watch the movi
 
 tmdb access-key: 8694646e178523a682ccf1e052b4a1dc
 
-rapid access-key: Not yet obtained
+rapid access-key: 89e7e8bb73msha528c083647ebbfp158eedjsne3b14326664d
 
 ## user story
 
