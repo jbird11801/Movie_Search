@@ -14,6 +14,25 @@ var rapidData;
 
 var tmdbData;
 
+var detail = document.createElement("div");
+
+detail.classList.add("movieContent");
+
+var movieTitle  = $('#movieTitle');
+
+var moviePoster = $('#moviePoster');
+
+var movieDescription = $('#movieDescription');
+
+var movieRating = $('#movieRating');
+
+movieTitle.hide();
+
+moviePoster.hide();
+
+movieDescription.hide();
+
+movieRating.hide();
 
 //Search btton function
 
@@ -195,7 +214,7 @@ function movieDetails(imdb_id, show_type) {
 
             // LogInfo();
 
-            //createMovieElement(data);
+            createMovieDetails();
 
         })
 
@@ -206,7 +225,7 @@ function movieDetails(imdb_id, show_type) {
 
 //     console.log(rapidData);
 
-//     //console.log(tmdbData);
+//     console.log(tmdbData);
 
 
 //     console.log('Title')//Title
@@ -310,33 +329,18 @@ function createMovieElement(movieData) {
 }
 
 function createMovieDetails() {
-    var detail = document.createElement("div");
-    detail.classList.add("movieContent");
-    
-    var movieTitle  = document.createElement("p");
-    var moviePoster = document.createElement("img");
-    var movieDescription = document.createElement("p");
-    var movieRating = document.createElement("p");
-    
-    movieTitle.textContent = rapidData.originalTitle;
-    moviePoster.src = 'https://image.tmdb.org/t/p/original/' + tmdbData.poster_path;
-    moviePoster.width = 300;
-    moviePoster.height = 400;
-    movieDescription.textContent = tmdbData.overview;
-    movieRating.textContent = tmbdData.vote_average + "/10";
 
+    movieTitle.show();
+
+    moviePoster.show();
+
+    movieDescription.show();
+
+    movieRating.show();
     
-    detail.appendChild(movieTitle); 
-    detail.appendChild(moviePoster); 
-    detail.appendChild(movieRating); 
-    detail.appendChild(movieDescription); 
-    
-    
-    return detail;
+    movieTitle.text(rapidData.originalTitle);
+    moviePoster.attr("src" , 'https://image.tmdb.org/t/p/original/' + tmdbData.poster_path);
+    movieDescription.text(tmdbData.overview);
+    movieRating.text(tmdbData.vote_average + "/10");
+
 }
-
-var movieDetailsDiv = document.getElementById("movie-details");
-
-var movieContent = createMovieDetails();
-
-movieDetailsDiv.appendChild(movieContent);
