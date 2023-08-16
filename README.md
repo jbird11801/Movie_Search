@@ -32,6 +32,8 @@ Used to learn about .remove() https://developer.mozilla.org/en-US/docs/Web/API/E
 
 Used bulma frame work https://bulma.io/
 
+Used to help with the auto complete https://jqueryui.com/autocomplete/
+
 ## Mock up
 
 ![Mock up useing figma](assets/images/WireFrame.png)

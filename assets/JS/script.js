@@ -34,6 +34,10 @@ movieDescription.hide();
 
 movieRating.hide();
 
+var searchedMovies= [];
+
+var searchedMoviesLs;
+
 //Search functions
 
 searchButEl.on("click", function () {
@@ -41,6 +45,8 @@ searchButEl.on("click", function () {
     clearResults ();
 
     var searchInput = inputEl.val();
+
+    saveLastMovie();
 
     findStreamingService(searchInput)
 
@@ -53,6 +59,8 @@ searchButEl.on("click", function () {
     if(keycode === "Enter"){
 
         clearResults ();
+
+        saveLastMovie();
 
         var searchInput = inputEl.val();
 
@@ -121,6 +129,8 @@ function findStreamingService(ShowNameString) {
             if (!(rapidData.streamingInfo.us)){
 
                  streamDetailsDiv.textContent = "No streaming services provide this title";
+
+                 MoreDetails(rapidData.imdbId, rapidData.type)
 
             }
     
@@ -197,6 +207,8 @@ function MoreDetails(imdb_id, show_type) {
 
                 console.log(data);
 
+                console.log( show_type)
+
             if (show_type === 'movie') {
 
                 tmdbData = data.movie_results[0];
@@ -213,30 +225,11 @@ function MoreDetails(imdb_id, show_type) {
 
 }
 
+//creates a element when called asigns it data from rapid api
 
-// function LogInfo() {
+function createServiceElement(ServiceData) {
 
-//     console.log(rapidData);
-
-//     console.log(tmdbData);
-
-
-//     console.log('Title')//Title
-
-//     console.log(rapidData.originalTitle);
-
-//     console.log('streaming Info')//streaming Info
-
-//     console.log(rapidData.streamingInfo);
-
-//     console.log(rapidData.streamingInfo.us)
-
-
-//     console.log('Rent Info')//streaming Info
-
-//     var temp = [];
-
-//     for (var i = 0; i < rapidData.streamingInfo.us.length; i++) {
+    //     for (var i = 0; i < rapidData.streamingInfo.us.length; i++) {
 //         if (temp.includes(rapidData.streamingInfo.us[i].service)) {
 
 //         }
@@ -253,42 +246,6 @@ function MoreDetails(imdb_id, show_type) {
 
 //         }
 //     };
-
-//     console.log('type of content')// type of content 
-
-
-//     console.log(rapidData.type);
-
-
-//     console.log('release_date')//release date
-
-//     if (rapidData.type === 'movie') {
-
-//         console.log(tmdbData.release_date);
-
-//     }
-
-//     else {
-
-//         console.log(tmdbData.first_air_date);
-
-//     }
-
-//     console.log('poster')//poster
-
-//     console.log('https://image.tmdb.org/t/p/original/' + tmdbData.poster_path)
-
-//     console.log('desciption')// desciption 
-
-//     console.log(tmdbData.overview);
-
-// }
-
-//
-
-//creates a element when called asigns it data from rapid api
-
-function createServiceElement(ServiceData) {
 
     var site = document.createElement("div");
 
@@ -342,39 +299,51 @@ function createMovieDetails() {
 
     movieDescription.text(tmdbData.overview);
 
-    movieRating.text(tmdbData.vote_average + "/10");
+    movieRating.text(tmdbData.vote_average.toFixed(1) + "/10");
 
 }
 
-var searchedMovies= [];
+// saves past movies to local storage 
 
 function saveLastMovie(){
 
+    var searchedMoviesLs = JSON.parse(localStorage.getItem('movie'));
+
     var inputValue= inputEl.val();
 
-    if(!searchedMovies.includes(inputValue)){
+    if (searchedMoviesLs === null) {
 
-        searchedMovies.push(inputValue);  
+        if(!searchedMovies.includes(inputValue)){
+
+            searchedMovies.push(inputValue);  
+
+        }
+
+        localStorage.setItem('movie', JSON.stringify(searchedMovies));
 
     }
 
-    localStorage.setItem('movie', JSON.stringify(searchedMovies));
+    else 
+    
+    {
+
+        if(!searchedMoviesLs.includes(inputValue)){
+    
+            searchedMoviesLs.push(inputValue);  
+    
+        }
+    
+        localStorage.setItem('movie', JSON.stringify(searchedMoviesLs));
+    
+    }
 
 }
 
-searchButEl.on('click', function (event) {
+// gets past movies from local storage and works to auto complete what you have
 
-    event.preventDefault();
-
-    saveLastMovie();
-
-  });
-
-$(function(){
+inputEl.on("keydown" , function(){
 
     var movieNames = JSON.parse(localStorage.getItem('movie'));
-
-    console.log(movieNames);
 
     $('#movieInput').autocomplete({
 
