@@ -345,3 +345,41 @@ function createMovieDetails() {
     movieRating.text(tmdbData.vote_average + "/10");
 
 }
+
+var searchedMovies= [];
+
+function saveLastMovie(){
+
+    var inputValue= inputEl.val();
+
+    if(!searchedMovies.includes(inputValue)){
+
+        searchedMovies.push(inputValue);  
+
+    }
+
+    localStorage.setItem('movie', JSON.stringify(searchedMovies));
+
+}
+
+searchButEl.on('click', function (event) {
+
+    event.preventDefault();
+
+    saveLastMovie();
+
+  });
+
+$(function(){
+
+    var movieNames = JSON.parse(localStorage.getItem('movie'));
+
+    console.log(movieNames);
+
+    $('#movieInput').autocomplete({
+
+        source: movieNames
+
+    });
+    
+});
