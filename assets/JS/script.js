@@ -104,7 +104,7 @@ function findStreamingService(ShowNameString) {
 
         headers: {
 
-            'X-RapidAPI-Key': '89e7e8bb73msha528c083647ebbfp158eedjsne3b14326664d',
+            'X-RapidAPI-Key': '87aefb0f3fmshc65e466dccc0088p18b4c4jsn27b9abea332d',
 
             'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
 
