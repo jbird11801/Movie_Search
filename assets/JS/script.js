@@ -34,7 +34,7 @@ movieDescription.hide();
 
 movieRating.hide();
 
-//Search btton function
+//Search functions
 
 searchButEl.on("click", function () {
 
@@ -61,6 +61,8 @@ searchButEl.on("click", function () {
 
   });
 
+// clears past streaming services results 
+
   function clearResults () {
     
     streamDetailsDiv.textContent = "";
@@ -82,7 +84,7 @@ searchButEl.on("click", function () {
   }
 
 
-// input the show name and it will out said shows info
+// input the show name and it will outut said shows info
 
 function findStreamingService(ShowNameString) {
 
@@ -112,18 +114,9 @@ function findStreamingService(ShowNameString) {
 
         .then(function (data) {
 
-            //the output of the function currently just loging to console
-
-            //    console.log(data);
-
             rapidData = data.result[0];
 
-            //console.log(rapidData.streamingInfo);
-
-            var moviesData = []
-
-            //console.log(rapidData);
-
+            var ServiceData = []
             
             if (!(rapidData.streamingInfo.us)){
 
@@ -139,7 +132,7 @@ function findStreamingService(ShowNameString) {
 
             for (var i = 0; i < rapidData.streamingInfo.us.length; i++) {
 
-                var movieInfo = {
+                var ServiceInfo = {
 
                     website: rapidData.streamingInfo.us[i].service,
 
@@ -151,22 +144,22 @@ function findStreamingService(ShowNameString) {
 
                 };
 
-                moviesData.push(movieInfo);
+                ServiceData.push(ServiceInfo);
 
             }
     
 
-            for (var i = 0; i < moviesData.length; i++) {
+            for (var i = 0; i < ServiceData.length; i++) {
 
-                var movieElement = createMovieElement(moviesData[i]);
+                var ServiceElement = createServiceElement(ServiceData[i]);
 
-                streamingEl.push(movieElement);
+                streamingEl.push(ServiceElement);
 
-                streamDetailsDiv.appendChild(movieElement);
+                streamDetailsDiv.appendChild(ServiceElement);
 
             }
 
-            movieDetails(rapidData.imdbId, rapidData.type)
+            MoreDetails(rapidData.imdbId, rapidData.type)
 
             }
 
@@ -174,7 +167,9 @@ function findStreamingService(ShowNameString) {
 
 }
 
-function movieDetails(imdb_id, show_type) {
+// Gets more details on the content with the imdb id and the type of content 
+
+function MoreDetails(imdb_id, show_type) {
 
     const options = {
 
@@ -200,7 +195,7 @@ function movieDetails(imdb_id, show_type) {
 
         .then(function (data) {
 
-            //    console.log(data);
+                console.log(data);
 
             if (show_type === 'movie') {
 
@@ -211,8 +206,6 @@ function movieDetails(imdb_id, show_type) {
                 tmdbData = data.tv_results[0];
 
             }
-
-            // LogInfo();
 
             createMovieDetails();
 
@@ -291,8 +284,11 @@ function movieDetails(imdb_id, show_type) {
 
 // }
 
+//
 
-function createMovieElement(movieData) {
+//creates a element when called asigns it data from rapid api
+
+function createServiceElement(ServiceData) {
 
     var site = document.createElement("div");
 
@@ -306,15 +302,15 @@ function createMovieElement(movieData) {
 
     var link = document.createElement("a");
     
-    service.textContent = "Service: " + movieData.website.toUpperCase();
+    service.textContent = "Service: " + ServiceData.website.toUpperCase();
 
-    streamingType.textContent = "Availability: " + movieData.type;
+    streamingType.textContent = "Availability: " + ServiceData.type;
 
-    quality.textContent = "Quality: " + movieData.quality;
+    quality.textContent = "Quality: " + ServiceData.quality;
 
     link.textContent = "View Here";
 
-    link.href = movieData.link;
+    link.href = ServiceData.link;
 
     site.appendChild(service);
 
@@ -328,6 +324,8 @@ function createMovieElement(movieData) {
 
 }
 
+// asigns data from tmdb api to pre made elements
+
 function createMovieDetails() {
 
     movieTitle.show();
@@ -339,8 +337,11 @@ function createMovieDetails() {
     movieRating.show();
     
     movieTitle.text(rapidData.originalTitle);
+
     moviePoster.attr("src" , 'https://image.tmdb.org/t/p/original/' + tmdbData.poster_path);
+
     movieDescription.text(tmdbData.overview);
+
     movieRating.text(tmdbData.vote_average + "/10");
 
 }
