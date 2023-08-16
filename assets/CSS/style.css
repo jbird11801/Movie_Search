@@ -4,22 +4,40 @@
 }
 
 .container-1 {
-    border-color: black;
-    border-style: solid;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
 .container-2 {
-    border-color: black;
-    border-style: solid;
 }
 
+ /* This particular piece of CSS is applied to the divs which were are appended to the streaming-details section when the movie search is completed. -Wayne*/ 
 .streamcard {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
     background-color: var(--darkinfo);
+    text-align: center;
     color: var(--textlight);  
     width: 29%;
-    text-align: center;
+    height: 10vh;
     margin: 1%;
+    border-radius: 25px;
+}
+
+/* Centers the text within the stream cards. -Wayne*/ 
+.streamcard > * {
+    flex-grow: 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Used this bit of CSS to center the images and a border. -Wayne*/ 
+.image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: black;
 }

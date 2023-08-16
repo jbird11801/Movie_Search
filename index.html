@@ -4,6 +4,7 @@
 <head>
   <title>Movie Streaming Search</title>
   <meta charset="UTF-8" />
+  <!--We used bulma for our framework. - Wayne -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
   <link rel="stylesheet" type="text/css" href="./assets/CSS/reset.css">
@@ -11,46 +12,48 @@
 
 </head>
 
-<body>
+<body class="has-background-grey-light">
   <header class="has-background-info-dark p-4">
+    <!--Not much to report here, but Bulma is great for making header bars. - Wayne -->
     <h1 class="is-size-2 has-text-centered has-text-light"><b>Where is it streaming?</b></h1>
   </header>
 
   <section class="block mt-5">
 
     <div class="field">
-      <label class="label has-text-centered is-size-4">Movie/Show Title</label>
+
+      <label class="label has-text-centered has-text-light is-size-4">Movie/Show Title</label>
       <div class="control has-text-centered ui-widget">
         
-        <input id = "movieInput" class="input" type="text" style="width: 33%;" placeholder="What movie are your looking for?">
+        <!--Included placeholder text here as well. Used Bulma to make the search box larger - Wayne -->
+        <input id = "movieInput" class="input is-medium is-info" type="text" style="width: 33%;" placeholder="What movie are your looking for?">
 
       </div>
     </div>
 
     <div class="field is-grouped is-justify-content-center">
       <div class="control">
-        <button id="Search" class="button is-link has-background-warning-dark">Search</button>
+        <button id="Search" class="button is-link has-background-warning-dark is-medium">Search</button>
       </div>
     </div>
   </section>
 
+   <!--This container contains the two subsequent containers. I did have some difficulty getting this to flex properly. I feel like it would've been easier to accomplish with Vanilla CSS than Bulma. - Wayne -->
   <section class="columns m-3 main-container">
+
+    <!--This container is appended with JS Code. I made "Streamcard" with vanilla CSS instead of Bulma.  - Wayne -->
     <div id="stream-details" class="column is-auto mx-3 container-1">
     </div>
 
-
-    <div id="movie-details" class="column is-half mx-3 container-2">
-
-        <p id="movieTitle"></p>
-
-        <img id="moviePoster" src="" alt="Movie Poster" width="300" height="400">
-
-        <p id="movieDescription"></p>
-
-        <p id="movieRating"></p>
-
-      </div>
-
+     <!--I was able to define the different divs and sections here and append whatever data was pulled from the API searches with our JS code.  - Wayne -->
+    <div id="movie-details" class="column is-half mx-3 container-2 m-3">
+      <h3 id="movieTitle" class="has-text-light has-text-centered is-size-3 m-3"></h3>
+      <img id="moviePoster" src="" alt="Movie Poster" width="300" height="400" class="image">
+      <p id="movieDescription" class="has-text-light has-text-centered m-3"></p>
+      <p id="movieRating" class="has-text-light has-text-centered m-3"></p>
+    
+    </div>
+    
     </section>
 
     </div>
